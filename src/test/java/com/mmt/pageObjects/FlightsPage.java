@@ -114,21 +114,17 @@ public class FlightsPage {
 	@FindBy(xpath = "//div[./p[contains(text(),'Stops From Ahmedabad')]]//div[./p[contains(text(),'Non Stop')]]/preceding-sibling::span/input[@id='listingFilterCheckbox']")
 	WebElement NonStopsFromAhmedabadCheckbox;
 
-	public void SelectCities() {
-		FromJourneyLnk.click();
-		BaseClass.Pause(1000);
-		BaseClass.WaitForClickable(10, FromJourneyInput);
-		FromJourneyInput.sendKeys("Ahmedabad");
-		BaseClass.Pause(1000);
-		FromJourneyRes.click();
-		BaseClass.Pause(1000);
-		ToJourneyLnk.click();
-		BaseClass.Pause(1000);
-		BaseClass.WaitForClickable(10, ToJourneyInput);
-		ToJourneyInput.sendKeys("Pune");
-		BaseClass.Pause(1000);
-		ToJourneyRes.click();
-		BaseClass.Pause(1000);
+	public void SelectCities() throws IOException {
+		
+		BaseClass.Validate(FromJourneyLnk.isDisplayed(), "Verification of Presence of From Journey Link");
+		/*
+		 * FromJourneyLnk.click(); BaseClass.Pause(1000); BaseClass.WaitForClickable(10,
+		 * FromJourneyInput); FromJourneyInput.sendKeys("Ahmedabad");
+		 * BaseClass.Pause(1000); FromJourneyRes.click(); BaseClass.Pause(1000);
+		 * ToJourneyLnk.click(); BaseClass.Pause(1000); BaseClass.WaitForClickable(10,
+		 * ToJourneyInput); ToJourneyInput.sendKeys("Pune"); BaseClass.Pause(1000);
+		 * ToJourneyRes.click(); BaseClass.Pause(1000);
+		 */
 		
 	}
 
@@ -167,6 +163,8 @@ public class FlightsPage {
 				"Depart value is not correct");
 		softassert.assertTrue(TripData_Header.get(4).getAttribute("value").contains(ExpectedData[4]),
 				"Passangers and class value is not correct");
+		
+		
 	}
 
 	public void VerifyPriceSlider() {

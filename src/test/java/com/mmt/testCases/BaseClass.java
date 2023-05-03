@@ -20,11 +20,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.model.ScreenCapture;
+import com.github.dockerjava.transport.DockerHttpClient.Request.Method;
 import com.mmt.utilities.ReadConfig;
 import com.mmt.utilities.Reporting;
 
@@ -41,7 +46,7 @@ public class BaseClass {
 	public String username=readconfig.getUsername();
 	public String password=readconfig.getPassword();
 	public static WebDriver driver;
-	public static ExtentTest logger2;
+	
 	
 	public static Logger logger;
 	
@@ -83,9 +88,45 @@ public class BaseClass {
 		System.out.println("Screenshot taken");
 	}
 	
-	public String randomestring()
+	public static void captureScreen2(String ValidationMsg) throws IOException {
+		
+		
+		
+	}
+	
+	public static void Validate(Boolean result, String VaidationMsg) throws IOException
 	{
-		String generatedstring=RandomStringUtils.randomAlphabetic(8);
+		if(result) 
+		{
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File source = ts.getScreenshotAs(OutputType.FILE);
+			
+			String SSName = randomestring();
+			File target = new File(System.getProperty("user.dir") + "/Screenshots/" + SSName + ".png");
+			String screenshotPath=System.getProperty("user.dir")+"\\Screenshots\\"+SSName+".png"; 
+			//ts.SaveAsFile(screenshotPath);
+			FileUtils.copyFile(source, target);
+			System.out.println("Screenshot taken");
+			//loggerr=extent.createTest(tr.getName());
+			//loggerr.log(Status.PASS, "Screenshot is below:"+ "<br />", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath));
+			Reporting.loggerr.log(Status.PASS,VaidationMsg + "<br/>", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		}
+		else
+		{
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File source = ts.getScreenshotAs(OutputType.FILE);
+			String SSName = randomestring();
+			File target = new File(System.getProperty("user.dir") + "/Screenshots/" + SSName + ".png");
+			String screenshotPath=System.getProperty("user.dir")+"\\Screenshots\\"+SSName+".png"; 
+			FileUtils.copyFile(source, target);
+			System.out.println("Screenshot taken");
+			Reporting.loggerr.log(Status.FAIL,VaidationMsg + "<br/>", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		}
+	}
+	
+	public static String randomestring()
+	{
+		String generatedstring=RandomStringUtils.randomAlphabetic(6);
 		return(generatedstring);
 	}
 	
@@ -114,6 +155,10 @@ public class BaseClass {
 	{		
 			return driver.findElement(By.xpath(Element)).isDisplayed();					
 		
-	}		
+	}
+	
+	
+	
+	 
 		
 }

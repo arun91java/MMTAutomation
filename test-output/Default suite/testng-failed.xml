@@ -6,8 +6,8 @@
       <class name="com.mmt.testCases.FlighSearchTests">
         <methods>
           <include name="tearDown"/>
-          <include name="TC01"/>
           <include name="setup"/>
+          <include name="TC01_VerifyFlighBooking"/>
         </methods>
       </class> <!-- com.mmt.testCases.FlighSearchTests -->
     </classes>
