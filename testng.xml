@@ -12,8 +12,7 @@
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.mmt.testCases.FlighSearchTests" />
-			<!--  <class name="com.inetbanking.testCases.TC_LoginDDT_002" />-->
-			
+			<!--  <class name="com.inetbanking.testCases.TC_LoginDDT_002" />-->			
 
 		</classes>
 
