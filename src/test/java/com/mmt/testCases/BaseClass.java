@@ -50,7 +50,7 @@ public class BaseClass {
 	
 	public static Logger logger;
 	
-	//@Parameters("browser")
+	//@Parameters("browser") comment 1
 	@BeforeClass
 	public void setup()
 	{		
